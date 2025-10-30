@@ -1,0 +1,41 @@
+{
+  "name": "library-book-back-end",
+  "version": "1.0.0",
+  "description": "Backend API for Library Book Management System",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.15.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kevin-Glory-Prasetyo/Library-Book-Back-End.git"
+  },
+  "keywords": [
+    "express",
+    "library",
+    "jwt",
+    "mysql",
+    "backend",
+    "nodejs"
+  ],
+  "author": "Vicky Yohanes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kevin-Glory-Prasetyo/Library-Book-Back-End/issues"
+  },
+  "homepage": "https://github.com/Kevin-Glory-Prasetyo/Library-Book-Back-End#readme",
+  "devDependencies": {}
+}
