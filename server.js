@@ -4,36 +4,30 @@ import loginRouter from "./routers/loginRouter.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { verifyToken } from "./middleware/verifyToken.js";
+import dataUserRouter from "./routers/dataUserRouter.js"
+import dataAdminRouter from "./routers/dataAdminRouter.js"
+import dataBukuRouter from "./routers/dataBukuRouter.js"
+import dataPeminjamanRputer from "./routers/dataPeminjamanRouter.js"
 
 
 const app = express();
 const PORT = process.env.PORT || 8000;
 
 
-app.use(bodyParser.json());
-app.use(cookieParser());
 app.use(cors({
-  origin: "http://localhost:5500", 
+  origin: ["http://localhost:5500", "http://localhost:5501"],
   credentials: true
 }));
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use("/auth", loginRouter);
-// app.get("/profile", verifyToken, (req, res) => {
-//   res.json({
-//     message: "Token valid, user terautentikasi.",
-//     user: req.user
-//   });
-// });
+app.use("/users", dataUserRouter);
+app.use("/users", dataAdminRouter);
+app.use("/buku", dataBukuRouter);
+app.use("/peminjaman", dataPeminjamanRputer);
 
-// app.get("/admin", verifyToken, (req, res) => {
-//   if (req.data.user.role !== "admin") {
-//     return res.status(403).json({ message: "Akses ditolak. Hanya admin yang boleh mengakses." });
-//   }
-//   res.json({
-//     message: `Selamat datang Admin ${req.data.user.first_name} ${req.data.user.last_name}!`,
-//     user: req.data.user
-//   });
-// });
+
 
 app.listen(PORT, () => {
   console.log(`Server jalan di http://localhost:${PORT}`);
