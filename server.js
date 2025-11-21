@@ -18,14 +18,16 @@ app.use(cors({
   origin: ["http://localhost:5500", "http://localhost:5501"],
   credentials: true
 }));
+app.use("/buku", dataBukuRouter);
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use("/auth", loginRouter);
 app.use("/users", dataUserRouter);
 app.use("/users", dataAdminRouter);
-app.use("/buku", dataBukuRouter);
 app.use("/peminjaman", dataPeminjamanRputer);
+app.use("/uploads", express.static("uploads"));
 
 
 

@@ -76,3 +76,94 @@ export const tambahAdmin = async (req, res) => {
     });
   }
 };
+
+export const deleteAdmin = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const [query] = await db.query("DELETE FROM users WHERE id_user = ?", [id]);
+
+    if (query.affectedRows > 0) {
+      return res.status(200).json({
+        statusCode: 200,
+        message: "Data admin berhasil dihapus",
+      });
+    }
+  } catch (error) {
+    console.error(error)
+    return res.status(500).json({
+      statusCode: 500,
+      message: "Server error",
+    });
+  }
+};
+
+
+export const detailAdmin = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const [query] = await db.query("SELECT * FROM users WHERE id_user = ?", [id]);
+
+    if (query.length === 0) {
+      return res.status(404).json({
+        statusCode: 404,
+        status: "failed",
+        error: true,
+        message: "Data admin tidak ditemukan",
+      });
+    }
+
+    return res.status(200).json({
+      statusCode: 200,
+      status: "success",
+      error: false,
+      message: "Data admin",
+      data: query[0]
+    });
+  } catch (error) {
+    console.error(error)
+    return res.status(500).json({
+      statusCode: 500,
+      message: "Server error",
+    });
+  }
+};
+
+
+export const updateAdmin = async (req, res) => {
+  try {
+    const { first_name, last_name, email } = req.body;
+    const { id } = req.params;
+
+    if (!first_name || !last_name || !email) {
+      return res.status(400).json({
+        statusCode: 400,
+        status: "Fail",
+        error: true,
+        message: "First name, last name, dan email wajib diisi",
+      });
+    }
+
+    const [query] = await db.query(
+      "UPDATE users SET first_name = ?, last_name = ?, email = ? WHERE id_user = ?",
+      [first_name, last_name, email, id]
+    )
+
+    if (query.affectedRows === 1) {
+      return res.status(200).json({
+        statusCode: 200,
+        status: "Success",
+        error: false,
+        message: "Data admin berhasil diupdate"
+      })
+      
+    }
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Error server",
+    });
+  }
+};
