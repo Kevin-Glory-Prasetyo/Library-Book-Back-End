@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2025 at 04:33 AM
+-- Generation Time: Nov 23, 2025 at 03:54 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,6 +24,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id_kategori` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id_kategori`, `name`) VALUES
+(1, 'Teknologi'),
+(2, 'Novel'),
+(3, 'Pendidikan'),
+(4, 'Bisnis'),
+(5, 'Sejarah');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `data_buku`
 --
 
@@ -31,9 +53,12 @@ CREATE TABLE `data_buku` (
   `id_buku` int(11) NOT NULL,
   `judul_buku` varchar(100) NOT NULL,
   `penulis_buku` varchar(100) NOT NULL,
-  `kategori_buku` varchar(100) NOT NULL,
+  `id_kategori` int(11) DEFAULT NULL,
   `penerbit_buku` varchar(100) NOT NULL,
-  `stok_buku` int(11) NOT NULL,
+  `tahun_terbit` int(11) DEFAULT NULL,
+  `deskripsi_buku` text DEFAULT NULL,
+  `total_stock` int(11) NOT NULL,
+  `available_stock` int(11) NOT NULL,
   `gambar_buku` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -41,12 +66,13 @@ CREATE TABLE `data_buku` (
 -- Dumping data for table `data_buku`
 --
 
-INSERT INTO `data_buku` (`id_buku`, `judul_buku`, `penulis_buku`, `kategori_buku`, `penerbit_buku`, `stok_buku`, `gambar_buku`) VALUES
-(1, 'Laskar Pelangi', 'Andrea Hirata', 'Fiksi', 'Bentang Pustaka', 15, 'https://upload.wikimedia.org/wikipedia/id/4/4b/Laskar_Pelangi_sampul.jpg'),
-(2, 'Bumi Manusia', 'Pramoedya Ananta Toer', 'Sejarah', 'Lentera Dipantara', 10, 'https://upload.wikimedia.org/wikipedia/id/5/5f/Bumi_Manusia_sampul.jpg'),
-(3, 'Filosofi Teras', 'Henry Manampiring', 'Pengembangan Diri', 'Kompas Gramedia', 25, 'https://images-na.ssl-images-amazon.com/images/I/71QZ7xJzVbL.jpg'),
-(4, 'Negeri 5 Menara', 'Ahmad Fuadi', 'Fiksi', 'Gramedia Pustaka Utama', 20, 'https://upload.wikimedia.org/wikipedia/id/2/25/Negeri_5_Menara.jpg'),
-(5, 'Rich Dad Poor Dad', 'Robert T. Kiyosaki', 'Bisnis', 'Warner Books', 30, 'https://images-na.ssl-images-amazon.com/images/I/81bsw6fnUiL.jpg');
+INSERT INTO `data_buku` (`id_buku`, `judul_buku`, `penulis_buku`, `id_kategori`, `penerbit_buku`, `tahun_terbit`, `deskripsi_buku`, `total_stock`, `available_stock`, `gambar_buku`) VALUES
+(22, 'Pemrograman Web Modern dengan JavaScript', 'Andi Pratama', 1, 'Informatika Press', 2021, 'Pemrograman Web Modern dengan JavaScript adalah panduan lengkap dan mendalam bagi siapa saja yang ingin menguasai fondasi hingga praktik lanjutan dalam pengembangan web menggunakan JavaScript—bahasa pemrograman yang menjadi jantung dari aplikasi web masa kini. Buku ini dirancang tidak hanya untuk pemula yang baru mengenal dunia web, tetapi juga bagi developer tingkat menengah yang ingin memperbarui pengetahuan mereka sesuai standar teknologi modern.', 10, 10, '/uploads/1763746148259-623926401.jpg'),
+(23, 'Kecerdasan Buatan untuk Pemula', 'Dewi Kusuma', 1, 'TeknoMedia', 2020, 'Kecerdasan Buatan untuk Pemula adalah panduan komprehensif yang dirancang sebagai pintu masuk ideal bagi siapa pun yang ingin memahami konsep dasar hingga gambaran luas tentang teknologi kecerdasan buatan (Artificial Intelligence/AI). Ditulis dengan bahasa yang sederhana, sistematis, dan bebas jargon teknis, buku ini bertujuan membantu pembaca mengenal AI tanpa merasa kewalahan oleh istilah yang rumit.', 15, 15, '/uploads/1763746200105-642261449.jpg'),
+(24, 'Belajar Python dalam 7 Hari', 'Herman Wijaya', 3, 'Code Academy', 2023, 'Belajar Python dalam 7 Hari adalah panduan komprehensif dan praktis yang dirancang untuk membantu pembaca memahami dasar-dasar pemrograman Python dalam waktu singkat namun tetap efektif. Buku ini dibuat khusus untuk pemula yang ingin belajar dari nol, mahasiswa yang membutuhkan referensi belajar cepat, hingga profesional yang ingin memperluas keterampilan teknis mereka di dunia pemrograman modern.', 25, 25, '/uploads/1763746287944-243931892.jpg'),
+(25, 'Sistem Basis Data Modern', 'Siti Rahmawati', 4, 'DataPress', 2019, 'Sistem Basis Data Modern adalah buku komprehensif yang dirancang untuk memberikan pemahaman mendalam tentang konsep, arsitektur, dan teknologi basis data generasi terbaru. Buku ini menggabungkan teori fundamental yang menjadi landasan sistem basis data dengan perkembangan teknologi modern seperti NoSQL, distributed databases, cloud database, hingga pemrosesan data berskala besar. Dengan penyampaian yang jelas dan aplikatif, buku ini sangat cocok untuk mahasiswa, praktisi IT, maupun pengembang yang ingin memperkuat kompetensi di bidang manajemen data.', 20, 0, '/uploads/1763746339590-884905156.jpg'),
+(26, 'Cloud Computing dan Arsitektur Sistem', 'Bagus Santoso', 4, 'TeknoGlobal', 2025, 'Cloud Computing dan Arsitektur Sistem adalah buku komprehensif yang memberikan pemahaman mendalam tentang konsep, teknologi, dan praktik terbaik dalam membangun sistem modern berbasis komputasi awan. Ditulis dengan pendekatan yang sistematis dan mudah diikuti, buku ini sangat cocok untuk mahasiswa, pengembang perangkat lunak, admin sistem, hingga profesional IT yang ingin memahami cara kerja cloud dan bagaimana merancang arsitektur sistem yang scalable, aman, dan efisien.', 7, 7, '/uploads/1763746537148-761730447.jpg'),
+(27, 'Psikologi Pendidikan untuk Guru', 'Rizky Mawardi', 3, 'Pustaka Pendidikan', 2025, 'Psikologi Pendidikan untuk Guru adalah sebuah buku komprehensif yang dirancang khusus untuk membantu para pendidik memahami proses belajar serta perkembangan peserta didik secara mendalam. Buku ini menggabungkan teori-teori psikologi modern dengan praktik pembelajaran di kelas, sehingga guru mampu mengambil keputusan pedagogis yang tepat berdasarkan pemahaman ilmiah tentang perilaku dan kebutuhan siswa.', 18, 18, '/uploads/1763746667106-95237640.jpg');
 
 -- --------------------------------------------------------
 
@@ -58,18 +84,24 @@ CREATE TABLE `data_peminjaman` (
   `id_peminjaman` int(11) NOT NULL,
   `id_buku` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `tanggal_pinjam` datetime NOT NULL,
-  `tanggal_kembali` datetime NOT NULL,
-  `tanggal_pengembalian` datetime NOT NULL,
-  `status_peminjaman` varchar(100) NOT NULL
+  `tanggal_pinjam` date NOT NULL,
+  `tanggal_kembali` date NOT NULL,
+  `tanggal_pengembalian` datetime DEFAULT NULL,
+  `status_peminjaman` varchar(100) NOT NULL,
+  `status_pengembalian` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `data_peminjaman`
 --
 
-INSERT INTO `data_peminjaman` (`id_peminjaman`, `id_buku`, `id_user`, `tanggal_pinjam`, `tanggal_kembali`, `tanggal_pengembalian`, `status_peminjaman`) VALUES
-(1, 2, 2, '2025-11-03 10:09:42', '2025-11-10 10:09:43', '2025-11-08 10:09:43', 'Dikembalikan');
+INSERT INTO `data_peminjaman` (`id_peminjaman`, `id_buku`, `id_user`, `tanggal_pinjam`, `tanggal_kembali`, `tanggal_pengembalian`, `status_peminjaman`, `status_pengembalian`) VALUES
+(2, 23, 5, '2025-11-22', '2025-11-29', '2025-11-23 21:36:55', 'selesai', 'tepat waktu'),
+(3, 24, 5, '2025-11-23', '2025-11-30', '2025-11-23 21:36:19', 'selesai', 'tepat waktu'),
+(4, 26, 5, '2025-11-23', '2025-11-30', '2025-11-23 21:34:27', 'selesai', 'tepat waktu'),
+(5, 22, 5, '2025-11-02', '2025-11-09', '2025-11-23 21:39:36', 'selesai', 'terlambat'),
+(6, 22, 5, '2025-11-23', '2025-11-30', '2025-11-23 21:50:50', 'selesai', 'tepat waktu'),
+(7, 24, 5, '2025-11-23', '2025-11-30', '2025-11-23 21:54:01', 'selesai', 'tepat waktu');
 
 -- --------------------------------------------------------
 
@@ -93,12 +125,18 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id_user`, `role`, `first_name`, `last_name`, `email`, `password`) VALUES
 (1, 'user', 'Vicky', 'Yohanes', '123@gmail.com', '$2b$10$voNuVrNfU6GLqRbM0To5AuxF1kupNJ2osdBP7eSvHJffpfBlY7Bde'),
 (2, 'user', 'Vickky', 'Vickky', '1234@gmail.com', '$2b$10$4LnTd24fN.KfNUS6F6zZyuLUSGAPQWKYci942QEMe6fGqU4qjlhoW'),
-(4, 'admin', 'admin', 'pertama', 'admin123@gmail.com', '$2b$10$DAWhMuS0VOAqaC.bJT9grucGVH/B587tBehoLOWeCa1/NabtMC2Ze'),
-(5, 'user', 'yosua', 'putra', 'yosua@gmail.com', '$2b$10$/bpWeFliXDoHSR1y1Dof0.BFgb6RzBDiInunZ7Xk72dazh1loaZgK');
+(5, 'user', 'yosua', 'putra', 'yosua@gmail.com', '$2b$10$/bpWeFliXDoHSR1y1Dof0.BFgb6RzBDiInunZ7Xk72dazh1loaZgK'),
+(9, 'admin', 'Vicky', 'Setiawan', 'vicky@com', '$2b$10$esTyjK3twYNqt4rp1.HeL./TcpudNSlfbncEPoLu5hGGaxnSPzRVS');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id_kategori`);
 
 --
 -- Indexes for table `data_buku`
@@ -123,22 +161,28 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `data_buku`
 --
 ALTER TABLE `data_buku`
-  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `data_peminjaman`
 --
 ALTER TABLE `data_peminjaman`
-  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
