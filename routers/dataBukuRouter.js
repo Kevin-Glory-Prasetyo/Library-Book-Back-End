@@ -1,7 +1,7 @@
 import { Router } from "express";
 const router = Router();
 
-import { dataBuku, detailBuku, addBuku, kategoriBuku, deleteBukuById, updateBuku, bukuTopPeminjam } from "../controller/dataBukuController.js";
+import { dataBuku, detailBuku, addBuku, kategoriBuku, deleteBukuById, updateBuku, bukuTopPeminjam, getBukuByKategori } from "../controller/dataBukuController.js";
 import uploadCover from "../middleware/upload_file.js";
 
 router.get('/buku',dataBuku)
@@ -15,4 +15,8 @@ router.get("/kategori", kategoriBuku);
 router.delete("/delete/:id", deleteBukuById);
 
 router.put("/updatebuku/:id", uploadCover.single("gambar"), updateBuku);
+
+router.get("/kategori",kategoriBuku);
+router.get("/kategori/:id_kategori",getBukuByKategori);
+
 export default router;
