@@ -8,6 +8,7 @@ import dataUserRouter from "./routers/dataUserRouter.js";
 import dataAdminRouter from "./routers/dataAdminRouter.js";
 import dataBukuRouter from "./routers/dataBukuRouter.js";
 import dataPeminjamanRputer from "./routers/dataPeminjamanRouter.js";
+import favoritRouter from "./routers/favoritRouter.js";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -31,6 +32,9 @@ app.use("/peminjaman", dataPeminjamanRputer);
 
 // untuk akses gambar: http://localhost:8000/uploads/namafile.jpg
 app.use("/uploads", express.static("uploads"));
+
+// Favorit 
+app.use("/favorit", favoritRouter);
 
 app.listen(PORT, () => {
   console.log(`Server jalan di http://localhost:${PORT}`);
