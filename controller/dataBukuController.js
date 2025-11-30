@@ -305,7 +305,31 @@ export const bukuTopPeminjam = async (req, res) => {
   }
 };
 
-// Menampilkan buku di halaman kategori.html 
+export const comingsoon = async (req, res) => {
+  try {
+    const stock = 0
+    const [query] = await db.query(
+      "SELECT data_buku.*,categories.name FROM data_buku INNER JOIN categories ON data_buku.id_kategori = categories.id_kategori WHERE total_stock = ?",[stock]
+    );
+
+    if (query.length >= 0) {
+      return res.status(200).json({
+        statusCode: 200,
+        status: "success",
+        error: false,
+        message: "Get Data Buku",
+        comming: query,
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Error server",
+    });
+  }
+};
+
+
 export const getBukuByKategori = async (req, res) => {
   try {
     const { id_kategori } = req.params;

@@ -95,7 +95,7 @@ export const dataPeminjamanUser = async (req, res) => {
       b.*
   FROM data_peminjaman AS p
   JOIN users AS u ON p.id_user = u.id_user
-  JOIN data_buku AS b ON p.id_buku = b.id_buku WHERE id_user = ?;
+  JOIN data_buku AS b ON p.id_buku = b.id_buku WHERE p.id_user = ?;
 
     `,
       [id]
